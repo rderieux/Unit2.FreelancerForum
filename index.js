@@ -3795,7 +3795,9 @@ function render() {
 
   // Calculate and display the average price
   const averagePrice = calcAveragePrice();
-  $averagePrice.textContent = `The average starting price is $${averagePrice}`;
+  $averagePrice.textContent = `The average starting price is $${averagePrice.toFixed(
+    2
+  )}`;
 }
 
 const addFreelancerIntervalId = setInterval(() => {

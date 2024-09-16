@@ -3757,7 +3757,7 @@ function addFreelancer() {
     firstNames[Math.floor(Math.random() * firstNames.length)];
   const freelancerLastName =
     lastNames[Math.floor(Math.random() * lastNames.length)];
-  const freelancerName = `${freelancerFirstName}${freelancerLastName};`;
+  const freelancerName = `${freelancerFirstName}${freelancerLastName}`;
   const freelancerOccupation =
     occupations[Math.floor(Math.random() * occupations.length)];
   const freelancerPrice = Math.floor(Math.random() * 100);
@@ -3786,7 +3786,7 @@ function render() {
       freelancer.occupation,
       freelancer.price
     );
-    $freelancer.textContent = `${freelancer.name} ${freelancer.occupation} ${freelancer.price}`;
+    $freelancer.textContent = `${freelancer.name} ${freelancer.occupation} $${freelancer.price}`;
     return $freelancer;
   });
   const $freelancerList = document.querySelector(".freelancers");

@@ -2740,7 +2740,6 @@ const firstNames = [
   "Zubayr",
   "Zuriel",
 ];
-
 const lastNames = [
   "Abbott",
   "Acevedo",
@@ -3743,3 +3742,69 @@ const lastNames = [
   "Zamora",
   "Zimmerman",
 ];
+const occupations = [
+  "Writer",
+  "Teacher",
+  "Programmer",
+  "Janitor",
+  "Delivery",
+  "Exterminator",
+];
+const maxFreelancers = 20;
+
+function addFreelancer() {
+  const freelancerFirstName =
+    firstNames[Math.floor(Math.random() * firstNames.length)];
+  const freelancerLastName =
+    lastNames[Math.floor(Math.random() * lastNames.length)];
+  const freelancerName = `${freelancerFirstName}${freelancerLastName};`;
+  const freelancerOccupation =
+    occupations[Math.floor(Math.random() * occupations.length)];
+  const freelancerPrice = Math.floor(Math.random() * 100);
+
+  freelancers.push({
+    name: freelancerName,
+    occupation: freelancerOccupation,
+    price: freelancerPrice,
+  });
+}
+
+function calcAveragePrice() {
+  const total = freelancers.reduce(
+    (sum, freelancer) => sum + freelancer.price,
+    0
+  );
+  return total / freelancers.length;
+}
+
+function render() {
+  const $freelancers = freelancers.map((freelancer) => {
+    const $freelancer = document.createElement("li");
+
+    $freelancer.classList.add(
+      freelancer.name,
+      freelancer.occupation,
+      freelancer.price
+    );
+    $freelancer.textContent = `${freelancer.name} ${freelancer.occupation} ${freelancer.price}`;
+    return $freelancer;
+  });
+  const $freelancerList = document.querySelector(".freelancers");
+  const $averagePrice = document.querySelector(".average");
+  $freelancerList.replaceChildren(...$freelancers);
+
+  // Calculate and display the average price
+  const averagePrice = calcAveragePrice();
+  $averagePrice.textContent = `The average starting price is $${averagePrice}`;
+}
+
+const addFreelancerIntervalId = setInterval(() => {
+  addFreelancer();
+  render();
+
+  if (freelancers.length >= maxFreelancers) {
+    clearInterval(addFreelancerIntervalId);
+  }
+}, 1000);
+
+render();
